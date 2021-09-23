@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CoffeShop.Models.ProductTypes>
+
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Product Types List</h2>
+            </div>
+            <div class="col-6 text-right">
+                <a asp-controller="ProductTypes" asp-action="Create" class="btn btn-primary">
+                    Create New Product Type
+                </a>
+            </div>
+        </div>
+    </div>
+
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Product Type Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+            <tr>
+                <td>@obj.Name</td>
+                <td class="text-center">
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="ProductTypes" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary">Edit</a>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="ProductTypes" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
