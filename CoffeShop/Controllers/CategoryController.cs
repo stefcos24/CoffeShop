@@ -102,12 +102,13 @@ namespace CoffeShop.Controllers
 
             _db.Category.Remove(obj);
             _db.SaveChanges();
-            return RedirectToAction("Index");
 
             if(obj == null)
             {
                 return NotFound();
             }
+            
+            return RedirectToAction("Index");
         }
     }
 }
