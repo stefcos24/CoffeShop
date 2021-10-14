@@ -1,5 +1,6 @@
 ﻿using CoffeShop.Data;
 using CoffeShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CoffeShop.Controllers
 {
+    [Authorize(Roles = WC.AdminRole)]
     public class ProductTypesController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -76,6 +76,21 @@ namespace CoffeShop.Controllers
             return View(ProductUserVM);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Summary")]
+        public IActionResult SummaryPost(ProductUserVM ProductUserVM)
+        {
+
+            return RedirectToAction(nameof(Confirmation));
+        }
+
+        public IActionResult Confirmation()
+        {
+            HttpContext.Session.Clear();
+            return View();
+        }
+
 
         public IActionResult Remove(int id)
         {

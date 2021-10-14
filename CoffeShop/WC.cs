@@ -7,11 +7,11 @@ namespace CoffeShop
 {
     public static class WC
     {
-        public static string ImagePath = @"\images\product\";
+        public const string ImagePath = @"\images\product\";
 
-        public static string SessionCart = "ShoppingCartSession";
+        public const string SessionCart = "ShoppingCartSession";
 
-        public static string AdminRole = "Admin";
-        public static string EmployeeRole = "Employee";
+        public const string AdminRole = "Admin";
+        public const string EmployeeRole = "Employee";
     }
 }
