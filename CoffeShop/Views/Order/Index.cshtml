@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CoffeShop.Models.OrderHeader>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Orders List</h2>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Order Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+         {
+            <tr>
+                <td>@obj.ApplicationUserId</td>
+                <td>@obj.FullName</td>
+                <td>@obj.OrderDate</td>
+                <td class="text-center">
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Product" asp-route-id="@obj.Id" asp-action="Upsert" class="btn btn-primary">Edit</a>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Product" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Delete</a>
+                    </div>
+                </td>
+                </tr>
+         }
+        </tbody>
+    </table>

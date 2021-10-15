@@ -81,6 +81,31 @@ namespace CoffeShop.Controllers
         [ActionName("Summary")]
         public IActionResult SummaryPost(ProductUserVM ProductUserVM)
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            OrderHeader orderHeader = new OrderHeader()
+            {
+                ApplicationUserId = claim.Value,
+                FullName = ProductUserVM.ApplicationUser.FullName,
+                OrderDate = DateTime.Now
+            };
+
+            _db.OrderHeader.Add(orderHeader);
+            _db.SaveChanges();
+
+            foreach(var prod in ProductUserVM.ProductList)
+            {
+                OrderDetail orderDetail = new OrderDetail()
+                {
+                    OrderHeaderId = orderHeader.Id,
+                    ProductId = prod.Id
+                };
+
+                _db.OrderDetail.Add(orderDetail);
+
+            }
+            _db.SaveChanges();
 
             return RedirectToAction(nameof(Confirmation));
         }
