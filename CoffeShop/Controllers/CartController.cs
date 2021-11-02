@@ -36,7 +36,15 @@ namespace CoffeShop.Controllers
             }
 
             List<int> prodInCart = shoppingCartList.Select(i => i.ProductId).ToList();
-            IEnumerable<Product> prodList = _db.Product.Where(u => prodInCart.Contains(u.Id));
+            IEnumerable<Product> prodListTemp = _db.Product.Where(u => prodInCart.Contains(u.Id));
+            IList<Product> prodList = new List<Product>();
+
+            foreach(var cartObj in shoppingCartList)
+            {
+                Product prodTemp = prodListTemp.FirstOrDefault(u => u.Id == cartObj.ProductId);
+                prodTemp.Quantity = cartObj.Quantity;
+                prodList.Add(prodTemp);
+            }
 
             return View(prodList);
         }
@@ -101,10 +109,10 @@ namespace CoffeShop.Controllers
                     OrderHeaderId = orderHeader.Id,
                     ProductId = prod.Id
                 };
-
                 _db.OrderDetail.Add(orderDetail);
 
             }
+
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Confirmation));

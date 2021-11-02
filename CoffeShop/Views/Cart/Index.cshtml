@@ -11,10 +11,10 @@
                         <div class="card-header bg-dark text-light ml-0 row container">
                             <div class="col-6">
                                 <i class="fa fa-shopping-cart"></i> &nbsp;
-                                Shopping Cart
+                                Racun
                             </div>
                             <div class="col-6 text-right">
-                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Nastavi</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -22,11 +22,17 @@
                                 <div class="row" style="color:#821f3d">
                                     <div class="col-lg-2">
                                     </div>
-                                    <div class="col-12 col-lg-7">
-                                        Product Details
+                                    <div class="col-12 col-lg-3">
+                                        Detalji
                                     </div>
                                     <div class="col-12 col-lg-2">
-                                        Price per sqft
+                                        Cijena
+                                    </div>
+                                    <div class="col-6 col-lg-2">
+                                        Količina
+                                    </div>
+                                    <div class="col-6 col-lg-2">
+                                        Ukupna cijena
                                     </div>
                                     <div class="col-6 col-sm-4 col-lg-1">
                                     </div>
@@ -40,7 +46,7 @@
                                     <div class="col-4 col-md-2 text-center py-2">
                                         <img src="@WC.ImagePath@obj.Image" class="rounded" width="100%" />
                                     </div>
-                                    <div class="col-8 col-lg-7">
+                                    <div class="col-8 col-lg-3">
                                         <h5>@obj.Name</h5>
                                         <div style="font-size:11px;">@obj.Description</div>
                                     </div>
@@ -61,7 +67,7 @@
                             <div class="row">
                                 <div class="col-6 col-md-3 offset-md-9">
                                     <button type="submit" class="btn btn-success form-control ">
-                                        <span>Continue</span>
+                                        <span>Nastavi</span>
                                     </button>
                                 </div>
                             </div>
@@ -81,10 +87,10 @@ else
                     <div class="card-header bg-dark text-light ml-0 row container">
                         <div class="col-6">
                             <i class="fa fa-shopping-cart"></i> &nbsp;
-                            Shopping Cart
+                            Račun
                         </div>
                         <div class="col-6 text-right">
-                            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Nastavi</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -93,10 +99,10 @@ else
                                 <div class="col-lg-2">
                                 </div>
                                 <div class="col-12 col-lg-7">
-                                    Please add some items to cart.
+                                    Molim Vas dodajte nešto na račun
                                 </div>
                                 <div class="col-12 col-lg-2">
-                                    Empty cart
+                                    Očisti račun
                                 </div>
                                 <div class="col-6 col-sm-4 col-lg-1">
                                 </div>

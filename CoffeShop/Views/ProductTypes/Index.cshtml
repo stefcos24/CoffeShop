@@ -3,11 +3,11 @@
     <div class="container p-3">
         <div class="row pt-4">
             <div class="col-6">
-                <h2 class="text-primary">Product Types List</h2>
+                <h2 class="text-primary">Lista tipova proizvoda</h2>
             </div>
             <div class="col-6 text-right">
                 <a asp-controller="ProductTypes" asp-action="Create" class="btn btn-primary">
-                    Create New Product Type
+                    Kreiraj novi tip proizvoda
                 </a>
             </div>
         </div>
@@ -18,7 +18,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Product Type Name</th>
+                <th scope="col">Ime tipa proizvoda</th>
             </tr>
         </thead>
         <tbody>
@@ -28,12 +28,12 @@
                 <td>@obj.Name</td>
                 <td class="text-center">
                     <div class="w-75 btn-group" role="group">
-                        <a asp-controller="ProductTypes" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary">Edit</a>
+                        <a asp-controller="ProductTypes" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary">Uredi</a>
                     </div>
                 </td>
                 <td class="text-center">
                     <div class="w-75 btn-group" role="group">
-                        <a asp-controller="ProductTypes" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Delete</a>
+                        <a asp-controller="ProductTypes" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Izbriši</a>
                     </div>
                 </td>
             </tr>

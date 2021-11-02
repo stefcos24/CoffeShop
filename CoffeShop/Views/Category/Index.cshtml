@@ -3,11 +3,11 @@
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Category List</h2>
+            <h2 class="text-primary">Lista kategorija</h2>
         </div>
         <div class="col-6 text-right">
             <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
-                Create New Category
+                Napravi novu kategoriju
             </a>
         </div>
     </div>
@@ -19,8 +19,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Category Name</th>
-                <th scope="col">Display Order</th>
+                <th scope="col">Ime kategorije</th>
+                <th scope="col">Br. pokazivanja</th>
             </tr>
         </thead>
         <tbody>
@@ -31,12 +31,12 @@
                     <td>@obj.DisplayOrder</td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary">Edit</a>
+                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary">Uredi</a>
                         </div>
                     </td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Delete</a>
+                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Izbriši</a>
                         </div>
                     </td>
                 </tr>

@@ -181,7 +181,7 @@ namespace CoffeShop.Controllers
             return View(product);
         }
 
-        ///GET - POST
+        ///POST - DELETE
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)

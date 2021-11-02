@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-8">
                     <select asp-for="Product.CategoryId" asp-items="@Model.CategorySelectList" class="form-control">
-                        <option disabled selected>--Select Category--</option>
+                        <option disabled selected>--Izaberi kategoriju--</option>
                     </select>
                     <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
                 </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-8">
                     <select asp-for="Product.ProductTypesId" asp-items="@Model.ProductTypesSelectList" class="form-control">
-                        <option disabled selected>--Select Product Type--</option>
+                        <option disabled selected>--Izaberi tip--</option>
                     </select>
                     <span asp-validation-for="Product.ProductTypesId" class="text-danger"></span>
                 </div>
@@ -91,7 +91,7 @@
                         }
                     </div>
                     <div class="col">
-                        <a asp-action="Index" class="btn btn-success w-100">Back</a>
+                        <a asp-action="Index" class="btn btn-success w-100">Nazad</a>
                     </div>
                 </div>
             </div>

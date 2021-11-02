@@ -9,6 +9,12 @@ namespace CoffeShop.Models
 {
     public class Product
     {
+        public Product()
+        {
+            Quantity = 1;
+        }
+
+
         [Key]
         public int Id { get; set; }
 
@@ -34,6 +40,10 @@ namespace CoffeShop.Models
 
         [ForeignKey("ProductTypesId")]
         public virtual ProductTypes ProductTypes { get; set; }
+
+        [NotMapped]
+        [Range(1,1000)]
+        public int Quantity { get; set; }
 
     }
 }
