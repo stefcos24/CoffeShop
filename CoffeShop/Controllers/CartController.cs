@@ -52,9 +52,16 @@ namespace CoffeShop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Index")]
-        public IActionResult IndexPost()
+        public IActionResult IndexPost(IEnumerable<Product> ProdList)
         {
-           return RedirectToAction(nameof(Summary));
+            List<ShoppingCart> shoppingCartsList = new List<ShoppingCart>();
+            foreach (Product prod in ProdList)
+            {
+                shoppingCartsList.Add(new ShoppingCart { ProductId = prod.Id, Quantity = prod.Quantity });
+            }
+
+            HttpContext.Session.Set(WC.SessionCart, shoppingCartsList);
+            return RedirectToAction(nameof(Summary));
         }
 
 
@@ -78,8 +85,15 @@ namespace CoffeShop.Controllers
             ProductUserVM = new ProductUserVM()
             {
                 ApplicationUser = _db.ApplicationUser.FirstOrDefault(u => u.Id == claim.Value),
-                ProductList = prodList
+                ProductList = prodList.ToList()
             };
+
+            foreach(var cartObj in shoppingCartList)
+            {
+                Product prodTemp = _db.Product.FirstOrDefault(u => u.Id == cartObj.ProductId);
+                prodTemp.Quantity = cartObj.Quantity;
+                ProductUserVM.ProductList.Append(prodTemp);
+            }
 
             return View(ProductUserVM);
         }
@@ -138,6 +152,20 @@ namespace CoffeShop.Controllers
             shoppingCartList.Remove(shoppingCartList.FirstOrDefault(u => u.ProductId == id));
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
 
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateCart(IEnumerable<Product> ProdList)
+        {
+            List<ShoppingCart> shoppingCartsList = new List<ShoppingCart>();
+            foreach(Product prod in ProdList)
+            {
+                shoppingCartsList.Add(new ShoppingCart { ProductId = prod.Id, Quantity = prod.Quantity });
+            }
+
+            HttpContext.Session.Set(WC.SessionCart, shoppingCartsList);
             return RedirectToAction(nameof(Index));
         }
     }
