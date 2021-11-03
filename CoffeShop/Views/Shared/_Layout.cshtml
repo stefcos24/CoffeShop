@@ -52,14 +52,15 @@
                                     @{
                                         var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart).Count;
                                     }
-                                    <i class="bi bi-cart2"></i> &nbsp; (@count)
+                                    Račun<i class="bi bi-cart2"></i>(@count)
 
                                 </a>
                             }
                             else
                             {
                                 <a href="#" class="nav-link">
-                                    <i class="bi bi-cart2"></i> &nbsp; (0)
+                                    Račun
+                                    <i class="bi bi-cart2"></i>(0)
                                 </a>
                             }
                         </li>
