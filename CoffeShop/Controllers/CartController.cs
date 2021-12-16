@@ -126,7 +126,7 @@ namespace CoffeShop.Controllers
                 _db.OrderDetail.Add(orderDetail);
 
             }
-
+         
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Confirmation));
