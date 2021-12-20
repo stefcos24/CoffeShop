@@ -11,15 +11,15 @@ namespace CoffeShop.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public int OrderHeaderId { get; set; }
 
         [ForeignKey("OrderHeaderId")]
-        public virtual OrderHeader OrderHeader { get; set; }
-
+        public OrderHeader OrderHeader { get; set; }
+        [Required]
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
+        public Product Product { get; set; }
     }
 }

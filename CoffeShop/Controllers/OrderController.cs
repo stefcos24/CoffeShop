@@ -23,5 +23,15 @@ namespace CoffeShop.Controllers
 
             return View(objList);
         }
+
+        //#region API CALLS
+        //[HttpGet]
+        //public IActionResult GetOrderList()
+        //{
+        //    return Json(new {data = _db.OrderHeader});
+        //}
+
+
+        //#endregion
     }
 }

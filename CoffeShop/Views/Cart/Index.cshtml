@@ -8,13 +8,13 @@
             <div class="container row">
                 <div class="col -8">
                     <div class="card mt-4">
-                        <div class="card-header bg-dark text-light ml-0 row container">
-                            <div class="col-6">
+                        <div class="card-header bg-dark text-light m-0 row container">
+                            <div class="col-6" style="font-size:18px; padding-top:3px">
                                 <i class="fa fa-shopping-cart"></i> &nbsp;
                                 Račun
                             </div>
-                            <div class="col-6 text-right">
-                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Vrati na početnu</a>
+                            <div class="col-6 text-right" style="text-align:right;">
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-info btn-sm">Vrati na početnu</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -49,14 +49,14 @@
                                 <input hidden asp-for="@Model[i].Id" />
                         <div class="row h-100">
                             <div class="col-4 col-md-2 text-center py-2">
-                                <img src="@WC.ImagePath@Model[i].Image" class="rounded" width="100%" />
+                                <img src="@WC.ImagePath@Model[i].Image" class="rounded" width="30%" />
                             </div>
                             <div class="col-8 col-lg-3">
                                 <h5>@Model[i].Name</h5>
                                 <div style="font-size:11px;">@Model[i].Description</div>
                             </div>
                             <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                <span style="font-size:17px;">@Model[i].Price</span>/ sqft
+                                <span style="font-size:17px;">@Model[i].Price</span>/ kom
 
                             </div>
                             <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
@@ -69,8 +69,8 @@
                             </div>
 
                             <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                <a asp-action="Remove" asp-route-id="@Model[i].Id" class="btn btn-outline-danger">
-                                    <i class="fas fa-trash"></i>
+                                <a asp-action="Remove" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i>
                                 </a>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                             <hr />
                             }
                         <div class="row">
-                            <div class="col-12 text-right pr-4" style="color:#821f2d">
+                            <div class="col-12 text-right pr-4" style="color:#821f2d; text-align:right; font-size:18px;">
                                 Ukupan račun : @string.Format("{0}", orderTotal) KM
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                     @if (User.IsInRole(WC.AdminRole) || (User.IsInRole(WC.EmployeeRole)))
                                     {
            
-                                        <input type="submit" asp-action="UpdateCart" formmethod="post" name="Update" value="Update Cart" class="btn btn-info form-control">
+                                        <input type="submit" asp-action="UpdateCart" formmethod="post" name="Update" value="Osvježi račun" class="btn btn-info form-control">
                                     }
                                 </div>
                                     <div class="col-6 col-md-3">
@@ -111,13 +111,13 @@ else
         <div class="container row">
             <div class="col -8">
                 <div class="card mt-4">
-                    <div class="card-header bg-dark text-light ml-0 row container">
-                        <div class="col-6">
+                    <div class="card-header bg-dark text-light m-0 row container">
+                        <div class="col-6" style="font-size:18px; padding-top:3px">
                             <i class="fa fa-shopping-cart"></i> &nbsp;
                             Račun
                         </div>
-                        <div class="col-6 text-right">
-                            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Nastavi</a>
+                        <div class="col-6 text-right" style="text-align:right;">
+                            <a asp-action="Index" asp-controller="Home" class="btn btn-info btn-sm">Nastavi</a>
                         </div>
                     </div>
                     <div class="card-body">

@@ -5,9 +5,10 @@
         <div class="col-6">
             <h2 class="text-primary">Lista kategorija</h2>
         </div>
-        <div class="col-6 text-right">
+        <div class="col-6 text-right" style="text-align:right;">
             <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
-                Napravi novu kategoriju
+                <i class="bi bi-plus-circle"></i> 
+                 Napravi novu kategoriju
             </a>
         </div>
     </div>
@@ -31,12 +32,12 @@
                     <td>@obj.DisplayOrder</td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary">Uredi</a>
+                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary"><i class="bi bi-pencil"></i> Uredi</a>
                         </div>
                     </td>
                     <td class="text-center">
                         <div class="w-75 btn-group" role="group">
-                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Izbriši</a>
+                            <a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger"><i class="bi bi-trash"></i> Izbriši</a>
                         </div>
                     </td>
                 </tr>

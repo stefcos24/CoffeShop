@@ -116,7 +116,7 @@ namespace CoffeShop.Controllers
             _db.OrderHeader.Add(orderHeader);
             _db.SaveChanges();
 
-            foreach(var prod in ProductUserVM.ProductList)
+            foreach (var prod in ProductUserVM.ProductList)
             {
                 OrderDetail orderDetail = new OrderDetail()
                 {
@@ -126,7 +126,6 @@ namespace CoffeShop.Controllers
                 _db.OrderDetail.Add(orderDetail);
 
             }
-         
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Confirmation));
