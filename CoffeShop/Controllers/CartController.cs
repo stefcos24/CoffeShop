@@ -47,6 +47,11 @@ namespace CoffeShop.Controllers
             }
 
             return View(prodList);
+            return View(prodListTemp);
+            //if (ModelState.IsValid)
+            //{
+            //    var obj = prodList.Where(u => i);
+            //}
         }
 
         [HttpPost]

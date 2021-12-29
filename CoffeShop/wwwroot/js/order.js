@@ -6,5 +6,5 @@ $(document).ready(function () {
 });
 
 function loadDataTable(url) {
-    dataTable = $("#")
+    dataTable = $("#myTable").DataTable();
 }

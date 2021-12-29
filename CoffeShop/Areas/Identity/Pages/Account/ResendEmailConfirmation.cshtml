@@ -4,11 +4,11 @@
     ViewData["Title"] = "Resend email confirmation";
 }
 
-<h1>Pošalji email za odobrenje</h1>
-<h4>Unesite svoj email</h4>
+<h1 class="m-2" style="text-transform:uppercase; font-size:30px;">Pošalji email za odobrenje</h1>
+<h4 class="m-2" style="font-size:20px;">Unesite svoj email</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4 m-2">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -16,7 +16,7 @@
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Pošaljite</button>
+            <button type="submit" class="btn btn-success mt-2">Pošaljite</button>
         </form>
     </div>
 </div>

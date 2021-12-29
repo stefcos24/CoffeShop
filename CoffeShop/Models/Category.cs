@@ -15,7 +15,7 @@ namespace CoffeShop.Models
         public string Name { get; set; }
         [Required]
         [Range(1,int.MaxValue,ErrorMessage = "Display Order must be greater than 0!")]
-        [DisplayName("Display Order")]
+        [DisplayName("Br. pokazivanja")]
         public int DisplayOrder { get; set; }
     }
 }
