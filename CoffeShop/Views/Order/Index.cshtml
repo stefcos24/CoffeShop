@@ -1,39 +1,23 @@
 ﻿@model IEnumerable<CoffeShop.Models.OrderHeader>
 
-<div class="container p-3">
+<div class="container mb-2">
     <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-primary">Porudžbine</h2>
+        <div class="col-6" style="padding-left:0;">
+            <h2 class="text-primary" style="text-transform:uppercase; font-size:30px;">Porudžbine</h2>
         </div>
     </div>
 </div>
 
-<table id="myTable" class="table">
+<table id="myTable" class="table table-bordered table-striped m-2" style="width:100%;">
     <thead>
         <tr>
-            <th scope="col">Br. porudžbine</th>
-            <th scope="col">Ime</th>
-            <th scope="col">Datum porudžbine</th>
+            <th>Br. porudžbine</th>
+            <th>Ime</th>
+            <th>Datum porudžbine</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var obj in Model)
-         {
-            <tr>
-                <td>@obj.Id</td>
-                <td>@obj.FullName</td>
-                <td>@obj.OrderDate</td>
-                @*<td class="text-center">
-                    <div class="w-75 btn-group" role="group">
-                        <a asp-controller="Product" asp-route-id="@obj.Id" asp-action="Upsert" class="btn btn-primary">Uredi</a>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="w-75 btn-group" role="group">
-                        <a asp-controller="Product" asp-route-id="@obj.Id" asp-action="Delete" class="btn btn-danger">Izbriši</a>
-                    </div>
-                </td>*@
-                </tr>
-         }
-        </tbody>
-    </table>
+</table>
+
+@section Scripts{
+    <script src="~/js/order.js"></script>
+}

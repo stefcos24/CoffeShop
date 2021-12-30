@@ -19,19 +19,20 @@ namespace CoffeShop.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<OrderHeader> objList = _db.OrderHeader;
+            //IEnumerable<OrderHeader> objList = _db.OrderHeader;
 
-            return View(objList);
+            return View();
         }
 
-        //#region API CALLS
-        //[HttpGet]
-        //public IActionResult GetOrderList()
-        //{
-        //    return Json(new {data = _db.OrderHeader});
-        //}
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetOrderList()
+        {
+            var orderList = _db.OrderHeader;
+            return Json(new { data = _db.OrderHeader });
+        }
 
 
-        //#endregion
+        #endregion
     }
 }
