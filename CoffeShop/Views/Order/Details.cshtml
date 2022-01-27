@@ -1,0 +1,80 @@
+﻿@model CoffeShop.Models.ViewModels.OrderVM
+
+<form method="post">
+    <input hidden asp-for="OrderHeader.Id" />
+    <br />
+    <div class="backgroundWhiteBorder">
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-dark text-light m-0 row container">
+                    <div class="col-6" style="font-size:18px; padding-top:3px">
+                        <i class="fa fa-shopping-cart"></i> &nbsp;
+                        Detalji porudžbine
+                    </div>
+                    <div class="col-6 text-right" style="text-align:right;">
+                        <a class="btn btn-info btn-sm" asp-action="Index">Nazad na račun</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container rounded p-2">
+                        <div class="row">
+                            <div class="col-12 col-lg-7 pb-4">
+                                <div class="row">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-info">Detalji korisnika:</span>
+                                    </h4>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Ime</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="OrderHeader.FullName" type="text" class="form-control" readonly />
+                                        <span asp-validation-for="OrderHeader.FullName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>E-mail</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="OrderHeader.Email" type="text" class="form-control" readonly />
+                                        <span asp-validation-for="OrderHeader.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">Datum porudžbine</div>
+                                    <div class="col-9">
+                                        <input value="@Model.OrderHeader.OrderDate.ToShortDateString()" type="text" class="form-control" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-5 row">
+                                <div class="col-12">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-info">Pregled narudžbe:</span>
+                                    </h4>
+                                    <ul class="list-group mb-3">
+                                        @foreach(var prod in Model.OrderDetail)
+                                        {
+                                         <li class="list-group-item d-flex justify-content-between p-2">
+                                            <div class="row container">
+                                                <div class="col-8">
+                                                    <h6 class="my-0 text-info">@prod.Product.Name</h6>
+                                                    <small class="text-muted">Cijena : @prod.Product.Price KM</small><br />
+                                                </div>
+                                            <div class="col-4">
+                                            </div>
+                                        </div>
+                                        </li>   
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

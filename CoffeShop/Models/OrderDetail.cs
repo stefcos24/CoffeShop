@@ -11,11 +11,13 @@ namespace CoffeShop.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         public int OrderHeaderId { get; set; }
 
         [ForeignKey("OrderHeaderId")]
         public OrderHeader OrderHeader { get; set; }
+
         [Required]
         public int ProductId { get; set; }
 

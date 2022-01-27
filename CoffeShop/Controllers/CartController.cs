@@ -47,7 +47,7 @@ namespace CoffeShop.Controllers
             }
 
             return View(prodList);
-            return View(prodListTemp);
+            //return View(prodListTemp);
             //if (ModelState.IsValid)
             //{
             //    var obj = prodList.Where(u => i);
@@ -59,7 +59,7 @@ namespace CoffeShop.Controllers
         [ActionName("Index")]
         public IActionResult IndexPost(IEnumerable<Product> ProdList)
         {
-            List<ShoppingCart> shoppingCartsList = new List<ShoppingCart>();
+            List<ShoppingCart> shoppingCartsList = new();
             foreach (Product prod in ProdList)
             {
                 shoppingCartsList.Add(new ShoppingCart { ProductId = prod.Id, Quantity = prod.Quantity });
@@ -115,6 +115,7 @@ namespace CoffeShop.Controllers
             {
                 ApplicationUserId = claim.Value,
                 FullName = ProductUserVM.ApplicationUser.FullName,
+                Email = ProductUserVM.ApplicationUser.Email,
                 OrderDate = DateTime.Now
             };
 

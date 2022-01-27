@@ -5,13 +5,14 @@ $(document).ready(function () {
 });
 
 function loadDataTable(url) {
-    dataTable = $("#myTable").DataTable({
+    dataTable = $('#tableData').DataTable({
         "ajax": {
             "url": "/Order/GetOrderList"
         },
         "columns": [
             { "data": "id", "width": "10%" },
             { "data": "fullName", "width": "20%" },
+            { "data": "email", "width": "20%" },
             {
                 "data": "orderDate",
                 "render": function (data) {
@@ -22,7 +23,7 @@ function loadDataTable(url) {
                     var year = formatDate.getFullYear();
                     var hours = formatDate.getHours();
                     var minutes = formatDate.getMinutes();
-                    
+
                     return date = day + "." + month + "." + year + " " + hours + ":" + minutes;
                 },
                 "width": "20%"
@@ -33,15 +34,15 @@ function loadDataTable(url) {
                     return `
                         <div class="text-center">
                             <a href="/Order/Details/${data}" class="btn btn-success text-white" style="cursor:pointer">
-                                <i class="fas fa-edit"></i>
+                                <i class="bi bi-pencil-square"></i>
                             </a>
                         </div>
                     `;
                 },
-                "width": "10%"
+                "width": "15%"
             }
         ],
         "order": [[0, "desc"]],
-        "language": { "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/bs_BA.json"}
+        "language": { "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/bs_BA.json" }
     });
 }

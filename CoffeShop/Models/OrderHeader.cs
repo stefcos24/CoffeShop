@@ -17,11 +17,12 @@ namespace CoffeShop.Models
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy\\MM\\dd HH:mm}",ApplyFormatInEditMode = true)]
         public DateTime OrderDate { get; set; }
 
         [Required]
         public string FullName { get; set; }
+        [Required]
+        public string Email { get; set; }
 
     }
 }

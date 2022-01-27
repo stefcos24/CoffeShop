@@ -28,7 +28,7 @@
                                         <label>Ime</label>
                                     </div>
                                     <div class="col-9">
-                                        <input asp-for="ApplicationUser.FullName" type="text" class="form-control" />
+                                        <input asp-for="ApplicationUser.FullName" type="text" class="form-control" readonly />
                                         <span asp-validation-for="ApplicationUser.FullName" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                                         <label>Br. Telefona</label>
                                     </div>
                                     <div class="col-9">
-                                        <input asp-for="ApplicationUser.PhoneNumber" type="text" class="form-control" />
+                                        <input asp-for="ApplicationUser.PhoneNumber" type="text" class="form-control" readonly/>
                                         <span asp-validation-for="ApplicationUser.PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                         <label>E-mail</label>
                                     </div>
                                     <div class="col-9">
-                                        <input asp-for="ApplicationUser.Email" type="text" class="form-control" />
+                                        <input asp-for="ApplicationUser.Email" type="text" class="form-control" readonly />
                                         <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -60,19 +60,20 @@
                                         @{ 
                                             var orderTotal = 0.0;
                                         }
-                                        @foreach(var obj in Model.ProductList)
-            {
-                                            <input type="hidden" asp-for="@obj.Id" />
-                                            <input type="hidden" asp-for="@obj.Name" />
-                                        <li class="list-group-item d-flex justify-content-between">
+                                        @*@foreach(var obj in Model.ProductList)*@
+                                        @for(int i=0; i < Model.ProductList.Count(); i++)
+                                        {
+                                         <input type="hidden" asp-for="@Model.ProductList[i].Id" />
+                                            <input type="hidden" asp-for="@Model.ProductList[i].Name" />
+                                            <li class="list-group-item d-flex justify-content-between">
                                             <div>
-                                                <h6 class="my-0 pb-1">@obj.Name</h6>
-                                                <small class="text-muted pt-1">Količina: @obj.Quantity</small>
+                                                <h6 class="my-0 pb-1">@Model.ProductList[i].Name</h6>
+                                                <small class="text-muted pt-1">Količina: @Model.ProductList[i].Quantity</small>
                                                 <br />
-                                                <small class="text-muted">Cijena: @(obj.Price*obj.Quantity) KM</small>
+                                                <small class="text-muted">Cijena: @(@Model.ProductList[i].Price*@Model.ProductList[i].Quantity) KM</small>
                                             </div>
-                                        </li>
-                                            orderTotal += obj.Price * obj.Quantity;
+                                            </li>
+                                            orderTotal += @Model.ProductList[i].Price * @Model.ProductList[i].Quantity;   
                                         }
                                         <li class="list-group-item d-flex justify-content-between bg-light">
                                             <small class="text-info">Ukupna cijena</small>
