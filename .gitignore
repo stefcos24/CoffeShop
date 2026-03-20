@@ -348,3 +348,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Docker Compose / local secrets
+.env
+.env.*
+!.env.example
