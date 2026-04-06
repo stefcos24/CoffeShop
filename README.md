@@ -1,4 +1,6 @@
-# CoffeShop (Docker)
+# CoffeShop 
+
+## Running via Docker
 
 This repo can run locally with **one command** using Docker Compose:
 
@@ -27,7 +29,7 @@ docker compose up --build
 
 That’s it. On first boot, the app will apply EF Core migrations automatically.
 
-## Run locally (without Compose)
+## Running locally
 
 You can also run the app with `dotnet run`. The app will automatically load `.env` (if present) and build the DB connection string from:
 
