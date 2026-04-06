@@ -2,11 +2,7 @@
 using CoffeShop.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CoffeShop.Controllers
 {
     [Authorize(Roles = WC.AdminRole)]
@@ -25,13 +21,11 @@ namespace CoffeShop.Controllers
             return View(objList);
         }
 
-        //GET - CREATE
         public IActionResult Create()
         {
             return View();
         }
 
-        //POST - CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ProductTypes obj)
@@ -46,7 +40,6 @@ namespace CoffeShop.Controllers
             return View(obj);
         }
 
-        //GET - EDIT
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -61,7 +54,6 @@ namespace CoffeShop.Controllers
             return View(obj);
         }
 
-        //GET - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ProductTypes obj)
@@ -76,7 +68,6 @@ namespace CoffeShop.Controllers
             return View(obj);
         }
 
-        //GET - DELETE
         public IActionResult Delete(int? id)
         {
             if(id == null || id == 0)
@@ -92,7 +83,6 @@ namespace CoffeShop.Controllers
             return View(obj);
         }
 
-        //POST - DELETE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)

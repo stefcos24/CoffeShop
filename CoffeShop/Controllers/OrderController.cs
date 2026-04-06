@@ -1,12 +1,8 @@
 ﻿using CoffeShop.Data;
-using CoffeShop.Models;
 using CoffeShop.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoffeShop.Controllers
 {
@@ -24,8 +20,6 @@ namespace CoffeShop.Controllers
 
         public IActionResult Index()
         {
-            //IEnumerable<OrderHeader> objList = _db.OrderHeader;
-
             return View();
         }
 

@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoffeShop.Controllers
 {
@@ -45,20 +44,8 @@ namespace CoffeShop.Controllers
             return View(objList);
         }
 
-        //GET - UPSERT(UPDATE + CREATE)
         public IActionResult Upsert(int? id)
         {
-            //IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i => new SelectListItem
-            //{
-            //    Text = i.Name,
-            //    Value = i.Id.ToString()
-            //});
-
-            //ViewBag.CategoryDropDown = CategoryDropDown;
-            ////ViewData["CategoryDropDown"] = CategoryDropDown;
-
-            //var product = new Product();
-
             ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
@@ -77,7 +64,6 @@ namespace CoffeShop.Controllers
 
             if (id == null)
             {
-                //Create
                 return View(productVM);
             }
             else
@@ -90,7 +76,6 @@ namespace CoffeShop.Controllers
             return View(productVM);
         }
 
-        //POST UPSERT(UPDATE + CREATE)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM productVM)
@@ -107,7 +92,6 @@ namespace CoffeShop.Controllers
             {
                 if (productVM.Product.Id == 0)
                 {
-                    //Create — file validated above
                     string upload = GetProductImageDirectory();
                     string fileName = Guid.NewGuid().ToString();
                     string extension = Path.GetExtension(files[0].FileName);
@@ -124,7 +108,6 @@ namespace CoffeShop.Controllers
                 }
                 else
                 {
-                    //Update
                     var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productVM.Product.Id);
 
                     if (files.Count > 0 && files[0] != null && files[0].Length > 0)
@@ -171,7 +154,6 @@ namespace CoffeShop.Controllers
             return View(productVM);
         }
 
-        //GET - DELETE
         public IActionResult Delete(int? id)
         {
             ProductVM productVM = new ProductVM();
@@ -180,11 +162,8 @@ namespace CoffeShop.Controllers
             {
                 return NotFound();
             }
-            //EAGER LOADING
             Product product = _db.Product.Include(u => u.Category).Include(u => u.ProductTypes).FirstOrDefault(u => u.Id == id);
-
-            //product.Category = _db.Category.Find(product.CategoryId);
-
+            
             if(product == null)
             {
                 return NotFound();
@@ -193,7 +172,6 @@ namespace CoffeShop.Controllers
             return View(product);
         }
 
-        ///POST - DELETE
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
