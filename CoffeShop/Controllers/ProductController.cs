@@ -1,4 +1,4 @@
-﻿using CoffeShop.Data;
+using CoffeShop.Data;
 using CoffeShop.Models;
 using CoffeShop.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -88,14 +88,20 @@ namespace CoffeShop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ProductVM productVM)
         {
+            var files = HttpContext.Request.Form.Files;
+            string webRootPath = _webHostEnvironment.WebRootPath;
+
+            if (productVM.Product.Id == 0)
+            {
+                if (files.Count == 0 || files[0] == null || files[0].Length == 0)
+                    ModelState.AddModelError("Product.Image", "Molimo učitajte sliku proizvoda.");
+            }
+
             if (ModelState.IsValid)
             {
-                var files = HttpContext.Request.Form.Files;
-                string webRootPath = _webHostEnvironment.WebRootPath;
-
                 if (productVM.Product.Id == 0)
                 {
-                    //Create
+                    //Create — file validated above
                     string upload = webRootPath + WC.ImagePath;
                     string fileName = Guid.NewGuid().ToString();
                     string extension = Path.GetExtension(files[0].FileName);
@@ -115,7 +121,7 @@ namespace CoffeShop.Controllers
                     //Update
                     var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productVM.Product.Id);
 
-                    if (files.Count > 0)
+                    if (files.Count > 0 && files[0] != null && files[0].Length > 0)
                     {
                         string upload = webRootPath + WC.ImagePath;
                         string fileName = Guid.NewGuid().ToString();
