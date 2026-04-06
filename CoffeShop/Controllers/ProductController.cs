@@ -26,6 +26,13 @@ namespace CoffeShop.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        private string GetProductImageDirectory()
+        {
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "images", "product");
+            Directory.CreateDirectory(path);
+            return path;
+        }
+
         public IActionResult Index()
         {
             IEnumerable<Product> objList = _db.Product;
@@ -89,7 +96,6 @@ namespace CoffeShop.Controllers
         public IActionResult Upsert(ProductVM productVM)
         {
             var files = HttpContext.Request.Form.Files;
-            string webRootPath = _webHostEnvironment.WebRootPath;
 
             if (productVM.Product.Id == 0)
             {
@@ -102,7 +108,7 @@ namespace CoffeShop.Controllers
                 if (productVM.Product.Id == 0)
                 {
                     //Create — file validated above
-                    string upload = webRootPath + WC.ImagePath;
+                    string upload = GetProductImageDirectory();
                     string fileName = Guid.NewGuid().ToString();
                     string extension = Path.GetExtension(files[0].FileName);
 
@@ -123,7 +129,7 @@ namespace CoffeShop.Controllers
 
                     if (files.Count > 0 && files[0] != null && files[0].Length > 0)
                     {
-                        string upload = webRootPath + WC.ImagePath;
+                        string upload = GetProductImageDirectory();
                         string fileName = Guid.NewGuid().ToString();
                         string extension = Path.GetExtension(files[0].FileName);
 
@@ -198,7 +204,7 @@ namespace CoffeShop.Controllers
                 return NotFound();
             }
 
-            string upload = _webHostEnvironment.WebRootPath + WC.ImagePath;
+            string upload = GetProductImageDirectory();
 
             var oldFile = Path.Combine(upload, obj.Image);
 
