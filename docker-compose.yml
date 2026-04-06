@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: coffeshop-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+      MSSQL_SA_PASSWORD: "${MSSQL_PASSWORD:?Set MSSQL_PASSWORD in .env}"
+    ports:
+      - "1433:1433"
+    volumes:
+      - coffeshop_mssql_data:/var/opt/mssql
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: CoffeShop/Dockerfile
+    container_name: coffeshop-web
+    depends_on:
+      - db
+    environment:
+      ASPNETCORE_URLS: "http://+:8080"
+      ASPNETCORE_ENVIRONMENT: "Production"
+      UseHttpsRedirection: "false"
+      RunMigrationsOnStartup: "true"
+      DB_HOST: "db"
+      DB_PORT: "${DB_PORT:?Set DB_PORT in .env}"
+      DB_NAME: "${DB_NAME:?Set DB_NAME in .env}"
+      DB_USER: "${DB_USER:?Set DB_USER in .env}"
+      MSSQL_SA_PASSWORD: "${MSSQL_PASSWORD:?Set MSSQL_PASSWORD in .env}"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+volumes:
+  coffeshop_mssql_data:

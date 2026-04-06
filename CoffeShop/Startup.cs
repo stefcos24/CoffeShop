@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace CoffeShop
 {
@@ -29,7 +28,8 @@ namespace CoffeShop
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")
+                Configuration.GetConnectionString("DefaultConnection"),
+                sql => sql.EnableRetryOnFailure()
             ));
             services.AddIdentity<IdentityUser,IdentityRole>()
                 .AddDefaultTokenProviders().AddDefaultUI()
@@ -74,16 +74,31 @@ namespace CoffeShop
             var runMigrationsOnStartup = Configuration.GetValue<bool?>("RunMigrationsOnStartup") ?? false;
             if (runMigrationsOnStartup)
             {
-                try
+                using var scope = app.ApplicationServices.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+                var maxAttempts = Configuration.GetValue<int?>("Migrations:MaxAttempts") ?? 20;
+                var initialDelayMs = Configuration.GetValue<int?>("Migrations:InitialDelayMs") ?? 1000;
+                var maxDelayMs = Configuration.GetValue<int?>("Migrations:MaxDelayMs") ?? 8000;
+
+                for (var attempt = 1; attempt <= maxAttempts; attempt++)
                 {
-                    using var scope = app.ApplicationServices.CreateScope();
-                    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                    db.Database.Migrate();
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "Failed to apply database migrations on startup.");
-                    throw;
+                    try
+                    {
+                        db.Database.Migrate();
+                        break;
+                    }
+                    catch (Exception ex) when (attempt < maxAttempts && (ex is SqlException || ex.InnerException is SqlException))
+                    {
+                        var delayMs = Math.Min(maxDelayMs, initialDelayMs * (int)Math.Pow(2, attempt - 1));
+                        logger.LogWarning(ex, "Database not ready (attempt {Attempt}/{MaxAttempts}); retrying in {DelayMs}ms.", attempt, maxAttempts, delayMs);
+                        Thread.Sleep(delayMs);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "Failed to apply database migrations on startup.");
+                        throw;
+                    }
                 }
             }
             app.UseStaticFiles();
